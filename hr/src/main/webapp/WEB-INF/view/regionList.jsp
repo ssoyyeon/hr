@@ -26,7 +26,7 @@
 			<tr>
 				<td>${r.regionId}</td>
 				<td>${r.regionName}</td>
-				<td><a href= "${pageContext.request.contextPath}/updateRegion?regionId=${r.regionId}">수정</a></td>
+				<td><a href= "${pageContext.request.contextPath}/modifyRegion?regionId=${r.regionId}">수정</a></td>
 				<td><a href= "${pageContext.request.contextPath}/removeRegion?regionId=${r.regionId}">삭제</a></td>
 			</tr>
 		</c:forEach>
