@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gd.hr.mapper.ICountryMapper">
 
+   	<!-- 나라 리스트 --><!-- countryList만 호출 -->
+   <select id="selectCountryIdAndList" resultType="com.gd.hr.vo.Country" parameterType="int"> <!-- countryList만 호출-->
+      SELECT 
+         country_id countryId,
+         country_name countryName
+      FROM countries 
+      WHERE region_id = #{regionId}
+   </select>
+   
 	<!-- 나라 추가 -->
    <insert id="insertCountry" parameterType="com.gd.hr.vo.Country">
       INSERT INTO countries (
@@ -46,7 +55,14 @@
    	</update>
    	
    	<!-- 나라 삭제 -->
-   	<delete id="deleteCountry" parameterType="String">
-   	 DELETE FROM counties WHERE countries_id= #{countryID}
+   <!-- 	<delete id="deleteCountry" parameterType="String">
+   	 DELETE FROM counties  
+   	 WHERE countries_id= #{countryID}
    	</delete>
+   	 -->
+   	<delete id="deleteCountryByRegionId" parameterType="int">
+    DELETE FROM counties   
+   	WHERE region_id= #{RegionId}  	
+   	</delete>
+   	
    	</mapper>

@@ -11,6 +11,9 @@ import com.gd.hr.vo.Region;
 @Mapper
 public interface ICountryMapper {
 	
+	// regionId룰 받는 나라 리스트
+	List<Country> selectCountryIdAndList(int regionId);
+	
 	// 기본 CRUD
 	// RegionList가져오기
 	List<Region> addCountryForm();
@@ -23,9 +26,11 @@ public interface ICountryMapper {
 	
 	// 나라 수정 Form
     Country selectCountryOne(String countryId);
+    
 	// 나라 수정 Action
 	int updateCountry(Country country);
     
 	// 나라 삭제
 	int deleteCountry(String countryId);
+	int deleteCountryByRegionId(int regionId);
 }

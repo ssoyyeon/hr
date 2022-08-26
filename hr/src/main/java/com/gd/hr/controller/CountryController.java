@@ -33,9 +33,11 @@ public class CountryController {
 	// 나라 추가 Action	
 	@PostMapping("/addCountry")
 	public String addCountry(Country country) {
+		// 디버깅
+		System.out.println("addCountry : " + country);
 		int row = countryService.addCountry(country);
 		// 디버깅
-		System.out.println(row);
+		System.out.println("addCountry countryService.addCountry(country) : " + row);
 		return "redirect:/countryList";
 	}
 	

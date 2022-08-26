@@ -18,6 +18,13 @@ public class CountryService implements ICountryService {
    @Autowired RegionMapper regionMapper;
    @Autowired ICountryMapper countryMapper;
    
+    // CountryList 가져오기
+	@Override
+	public List<Country> getCountryIdAndList(int regionId) {
+		List<Country> list = countryMapper.selectCountryIdAndList(regionId);
+		return list;
+	}
+   
    // RegionList 가져오기
    @Override
    public List<Region> addCountryForm() {
@@ -53,6 +60,8 @@ public class CountryService implements ICountryService {
 	public int removeCountry(String countryId) {
 		return countryMapper.deleteCountry(countryId);
 	}
+
+
 
 	
 }
