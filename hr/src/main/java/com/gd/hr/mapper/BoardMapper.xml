@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gd.hr.mapper.BoardMapper">
+	<!-- 
+		selectKey : 
+			Select를 제외한 Insert, Delete, Update 등의 동작 시 다른 DB의 값을 조회해서 얻은 값들을 넣어야 할 때 사용,
+			실행 전이나 실행 후에 리턴값을 파라미터 타입으로 채움  
+	 -->
+	<!-- board insert C 추가 -->
+	<insert id="insertBoard" parameterType="com.gd.hr.vo.Board">
+		<selectKey keyProperty="boardNo" order="BEFORE" > <!-- com.gd.hr.vo.Board의 setBoardNo(selectKey) 호출-->
+			<!-- MariaDB -> SELECT LAST_INSERT_ID() -->
+			<!-- 시퀀스의 값을 증가시키고 싶다면 .nextVal -->
+			SELECT board_seq.nextVal FROM dual
+		</selectKey>
+		
+		Insert into board(
+			board_no,
+			board_title,
+			board_content,
+			board_date
+		)VALUES(
+			#{boardNo},
+			#{boardTitle},
+			#{boardContent},
+			SYSDATE
+		)
+	</insert>
+
+	<!-- board select R 읽기 -->
+	<select id="selectBoardList" resultType="com.gd.hr.vo.BoardForm">
+	SELECT 
+	    b.board_no boardNo,
+	    b.board_title boardTitle,
+	    b.board_content boardContent,
+	    b.board_date boardDate,
+	    bf.boardfile_no boardfileNo,
+	    bf.file_name fileName,
+	    bf.file_type fileType
+	FROM board b INNER JOIN boardfile bf
+	ON b.board_no= bf.board_no
+	</select>
+
+	<!-- board update U 수정 -->
+
+	<!-- board delete D 삭제 -->
+</mapper>
